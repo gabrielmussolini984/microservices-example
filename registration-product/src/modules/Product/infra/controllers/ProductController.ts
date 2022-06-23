@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateProduct } from "@modules/Product/usecases/CreateProduct";
 import { UpdateProduct } from "@modules/Product/usecases/UpdateProduct";
+import { RemoveProduct } from "@modules/Product/usecases/RemoveProduct";
 
 export class ProductController {
   public async store(req: Request, res: Response): Promise<Response> {
@@ -16,5 +17,11 @@ export class ProductController {
       req.body?.title
     );
     return res.status(200).json({ product });
+  }
+
+  public async remove(req: Request, res: Response): Promise<Response> {
+    const removeProduct = container.resolve(RemoveProduct);
+    await removeProduct.execute(Number(req.params?.id));
+    return res.status(204).json();
   }
 }
