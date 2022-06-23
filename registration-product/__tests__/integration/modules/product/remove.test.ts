@@ -12,8 +12,6 @@ describe("Product Remove", () => {
     const response = await request.delete(`/product/${product.id}`).send();
 
     expect(response.status).toBe(204);
-    expect(response.body).toHaveProperty("product");
-    expect(response.body.product).toHaveProperty("title", "Produto Alterado");
   });
 
   it("Should not be remove product, because invalid id", async () => {
