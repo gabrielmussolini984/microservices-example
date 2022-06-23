@@ -9,4 +9,5 @@ module.exports = {
     "@containers/(.*)": "<rootDir>/src/shared/containers/$1",
   },
   modulePathIgnorePatterns: ["<rootDir>/dist/", "<rootDir>/__tests__/config"],
+  setupFiles: ["dotenv/config"],
 };
