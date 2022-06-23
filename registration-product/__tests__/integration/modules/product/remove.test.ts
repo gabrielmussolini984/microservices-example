@@ -9,13 +9,13 @@ describe("Product Remove", () => {
       },
     });
 
-    const response = await request.delete(`/product/${product.id}`).send();
+    const response = await request.delete(`/product/${product.id}`);
 
     expect(response.status).toBe(204);
   });
 
   it("Should not be remove product, because invalid id", async () => {
-    const response = await request.delete(`/product/${99}`).send();
+    const response = await request.delete(`/product/${99}`);
 
     expect(response.status).toBe(404);
     expect(response.body.message).toBe("Product not found");
