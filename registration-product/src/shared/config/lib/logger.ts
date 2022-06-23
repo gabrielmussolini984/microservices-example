@@ -1,4 +1,3 @@
-import { Console } from "console";
 import winston from "winston";
 
 const levels = {
@@ -9,10 +8,8 @@ const levels = {
   debug: 4,
 };
 const level = () => {
-  const env = process.env.NODE_ENV || "development";
-  console.log(env);
-  const isDevelopment = env === "DEV" || env == "test";
-  console.log(isDevelopment);
+  const env = process.env.NODE_ENV || "DEV";
+  const isDevelopment = env === "DEV" || env == "TEST";
   return isDevelopment ? "debug" : "warn";
 };
 const colors = {
