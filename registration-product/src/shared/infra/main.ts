@@ -4,6 +4,8 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import "reflect-metadata";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../config/lib/swagger.json";
 import Morgan from "../config/lib/morgan";
 // import "./containers";
 import routes from "./routes";
@@ -17,6 +19,7 @@ export const get = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(routes);
+  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
     if (err instanceof AppException) {
