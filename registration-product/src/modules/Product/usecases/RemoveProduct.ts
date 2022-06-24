@@ -8,9 +8,12 @@ export class RemoveProduct {
       },
     });
     if (!productExist) throw new AppException("Product not found", 404);
-    await prisma.product.delete({
+    await prisma.product.update({
       where: {
         id,
+      },
+      data: {
+        active: false,
       },
     });
     return;
