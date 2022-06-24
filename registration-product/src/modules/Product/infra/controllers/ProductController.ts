@@ -3,6 +3,7 @@ import { container } from "tsyringe";
 import { CreateProduct } from "@modules/Product/usecases/CreateProduct";
 import { UpdateProduct } from "@modules/Product/usecases/UpdateProduct";
 import { RemoveProduct } from "@modules/Product/usecases/RemoveProduct";
+import { ListProducts } from "@modules/Product/usecases/ListProducts";
 
 export class ProductController {
   public async store(req: Request, res: Response): Promise<Response> {
@@ -23,5 +24,11 @@ export class ProductController {
     const removeProduct = container.resolve(RemoveProduct);
     await removeProduct.execute(Number(req.params?.id));
     return res.status(204).json();
+  }
+
+  public async list(req: Request, res: Response): Promise<Response> {
+    const listProducts = container.resolve(ListProducts);
+    const products = await listProducts.execute();
+    return res.status(200).json({ products });
   }
 }
