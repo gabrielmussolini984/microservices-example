@@ -7,7 +7,7 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../config/lib/swagger.json";
 import Morgan from "../config/lib/morgan";
-// import "./containers";
+import "@containers/index";
 import routes from "./routes";
 import { AppException } from "../errors/AppException";
 import Logger from "@config/lib/logger";
