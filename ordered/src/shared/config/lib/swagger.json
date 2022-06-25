@@ -1,0 +1,108 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Ordereds",
+    "description": "Ordereds API",
+    "version": "1.0"
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "ordered",
+      "description": "Everything about ordered"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/ordered": {
+      "post": {
+        "tags": ["ordered"],
+        "summary": "Add a new ordered",
+        "description": "",
+        "operationId": "addOrdered",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create a new ordered",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateOrdered"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Ordered created",
+            "schema": {
+              "properties": {
+                "ordered": {
+                  "$ref": "#/definitions/Ordered"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Products can not null"
+          },
+          "404": {
+            "description": "Invalid products"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Ordered": {
+      "type": "object",
+      "required": ["products"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1
+        },
+        "products": {
+          "type": "array",
+          "example": [
+            {
+              "id": 1,
+              "title": "Produto 1"
+            },
+            {
+              "id": 2,
+              "title": "Produto 2"
+            }
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2022-06-23T12:13:43.108Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2022-06-23T12:13:43.108Z"
+        }
+      },
+      "xml": {
+        "name": "Ordered"
+      }
+    },
+    "CreateOrUpdateOrdered": {
+      "type": "object",
+      "required": ["products"],
+      "properties": {
+        "products": {
+          "type": "array",
+          "example": [1, 4, 5]
+        }
+      },
+      "xml": {
+        "name": "CreateOrUpdateOrdered"
+      }
+    }
+  }
+}

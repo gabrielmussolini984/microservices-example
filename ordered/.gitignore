@@ -2,3 +2,4 @@ node_modules
 .docker/db
 .env
 coverage
+package-lock.json
