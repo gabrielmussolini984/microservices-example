@@ -7,6 +7,7 @@ module.exports = {
     "@config/(.*)": "<rootDir>/src/shared/config/$1",
     "@errors/(.*)": "<rootDir>/src/shared/errors/$1",
     "@containers/(.*)": "<rootDir>/src/shared/containers/$1",
+    "@shared/(.*)": "<rootDir>/src/shared/$1",
   },
   modulePathIgnorePatterns: ["<rootDir>/dist/", "<rootDir>/__tests__/config"],
   setupFiles: ["dotenv/config"],
