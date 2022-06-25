@@ -12,7 +12,7 @@ datasource db {
 
 model Ordered {
   id        Int      @id @default(autoincrement())
-  ordereds  String[]
+  products  Json[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
