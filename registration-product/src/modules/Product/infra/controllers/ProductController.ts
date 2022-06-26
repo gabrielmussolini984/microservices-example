@@ -28,7 +28,7 @@ export class ProductController {
 
   public async list(req: Request, res: Response): Promise<Response> {
     const listProducts = container.resolve(ListProducts);
-    const products = await listProducts.execute();
+    const products = await listProducts.execute(req.query);
     return res.status(200).json({ products });
   }
 }
