@@ -4,7 +4,10 @@ import { IProductDTO } from "@modules/Product/dto/IProductDTO";
 import { IProductRepository } from "@modules/Product/repository/IProductRepository";
 
 export class ProductRepository implements IProductRepository {
-  update(id: number, data: ICreateProductDTO): Promise<IProductDTO> {
+  update(
+    id: number,
+    data: ICreateProductDTO | { active: boolean }
+  ): Promise<IProductDTO> {
     return prisma.product.update({
       data,
       where: {
@@ -22,13 +25,6 @@ export class ProductRepository implements IProductRepository {
   }
   public async findOne(id: number): Promise<IProductDTO | null> {
     return prisma.product.findUnique({
-      where: {
-        id,
-      },
-    });
-  }
-  public async remove(id: number): Promise<IProductDTO> {
-    return prisma.product.delete({
       where: {
         id,
       },

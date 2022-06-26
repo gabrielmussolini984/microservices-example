@@ -11,13 +11,8 @@ export class RemoveProduct {
   public async execute(id: number): Promise<void> {
     const productExist = await this.productRepository.findOne(id);
     if (!productExist) throw new AppException("Product not found", 404);
-    await prisma.product.update({
-      where: {
-        id,
-      },
-      data: {
-        active: false,
-      },
+    await this.productRepository.update(id, {
+      active: false,
     });
     return;
   }
