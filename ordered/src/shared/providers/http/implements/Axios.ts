@@ -23,13 +23,19 @@ export class AxiosProvider implements IHttpProvider {
           });
           break;
         case "PUT":
-          response = await Services[serviceName].put(path, data, { headers });
+          response = await axios.put(`${baseUrls[serviceName]}${path}`, data, {
+            headers,
+          });
           break;
         case "DELETE":
-          response = await Services[serviceName].delete(path, { headers });
+          response = await axios.delete(`${baseUrls[serviceName]}${path}`, {
+            headers,
+          });
           break;
         default:
-          response = await Services[serviceName].get(path, { headers });
+          response = await axios.delete(`${baseUrls[serviceName]}${path}`, {
+            headers,
+          });
           break;
       }
       return response;
