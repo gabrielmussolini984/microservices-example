@@ -18,11 +18,19 @@ describe("Product Update", () => {
     expect(response.body.product).toHaveProperty("title", "Produto Alterado");
   });
 
-  it("Should not be update product, because invalid id or title", async () => {
+  it("Should not be update product, because invalid title", async () => {
     const response = await request.put(`/product/${10}`).send({
       title: null,
     });
 
     expect(response.status).toBe(422);
+  });
+
+  it("Should not be update product, because invalid id", async () => {
+    const response = await request.put(`/product/${999}`).send({
+      title: "Teste",
+    });
+
+    expect(response.status).toBe(404);
   });
 });

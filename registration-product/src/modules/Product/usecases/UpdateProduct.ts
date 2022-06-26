@@ -11,6 +11,9 @@ export class UpdateProduct {
   ) {}
   public async execute(id: number, title: string): Promise<IProductDTO> {
     if (!id || !title) throw new AppException("Params required", 422);
+    const productExist = await this.productRepository.findOne(id);
+    if (!productExist) throw new AppException("Product not found", 404);
+
     const productUpdated = await this.productRepository.update(id, { title });
     return productUpdated;
   }
