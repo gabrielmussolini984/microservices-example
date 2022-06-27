@@ -19,11 +19,11 @@ export class CreateOrdered {
   public async execute(products: any[]): Promise<IOrderedDTO> {
     if (!products?.length) throw new AppException("Products is required", 422);
     const response = await this.httpProvider.request(
-      HttpMethods.POST,
+      HttpMethods.GET,
       EListServices.product,
-      "/products/valid"
+      `/product?products=${products.join(",")}`
     );
-    if (!response?.valid)
+    if (!response || response.products?.length !== products.length)
       throw new AppException("Any product invalid or notfound", 404);
     const ordered = await this.orderedRepository.create({
       products: products.map((product) => ({

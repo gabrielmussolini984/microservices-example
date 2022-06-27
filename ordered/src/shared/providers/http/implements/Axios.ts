@@ -33,19 +33,15 @@ export class AxiosProvider implements IHttpProvider {
           });
           break;
         default:
-          response = await axios.delete(`${baseUrls[serviceName]}${path}`, {
+          response = await axios.get(`${baseUrls[serviceName]}${path}`, {
             headers,
           });
           break;
       }
-      return response;
+      return response?.data;
     } catch (error) {
       Logger.error(
-        `Error API: ${serviceName}/${path} - Method: ${method} - Data: ${data} - Headers: ${headers} - Error: ${JSON.stringify(
-          error,
-          null,
-          2
-        )}`
+        `Error API: ${serviceName}/${path} - Method: ${method} - Data: ${data} - Headers: ${headers} - Error: ${JSON.stringify(error)}`
       );
       throw new AppException("Error Api", 400);
     }
@@ -53,9 +49,11 @@ export class AxiosProvider implements IHttpProvider {
   static logging() {
     axios.interceptors.request.use((request) => {
       Logger.info(JSON.stringify(request, null, 2));
+      return request;
     });
     axios.interceptors.response.use((response) => {
-      Logger.info(JSON.stringify(response, null, 2));
+      Logger.info(JSON.stringify(response?.data));
+      return response;
     });
   }
 }
