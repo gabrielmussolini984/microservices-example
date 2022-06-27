@@ -26,13 +26,13 @@ export class ProductRepository implements IProductRepository {
   public async findAll(filters: IFilters): Promise<IProductDTO[]> {
     let where = {};
     if (filters.ids) {
+      const idsNumber = filters.ids.map((id) => Number(id))
       Object.assign(where, {
         id: {
-          in: filters.ids.map((id) => Number(id)),
+          in: idsNumber,
         },
       });
     }
-    console.log(where);
     return prisma.product.findMany({
       where,
     });
