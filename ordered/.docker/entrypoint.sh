@@ -5,4 +5,5 @@ if [ ! -f ".env" ]; then
   cp .env.example .env
 fi
 npx prisma migrate dev
+npm run build
 npm start
