@@ -6,7 +6,10 @@
   "scripts": {
     "testdb:up": "docker-compose -f .docker/docker-compose.test.yml up -d",
     "test": "npm run testdb:up && dotenv -e ./.env.test -- npx prisma migrate deploy && dotenv -e ./.env.test -- jest --watchAll --collectCoverage",
-    "dev": "tsnd -r tsconfig-paths/register --respawn --respawn --transpile-only ./src/shared/infra/server.ts"
+    "dev": "dotenv -e ./.env.development -- tsnd -r tsconfig-paths/register --respawn --respawn --transpile-only ./src/shared/infra/server.ts",
+    "build": "tsc --build",
+    "build:babel": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/shared/infra/server.js"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +44,15 @@
     "ts-node": "^10.8.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.0.0",
-    "typescript": "^4.7.4"
+    "tscpaths": "0.0.9",
+    "typescript": "^4.7.4",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "7.13.10",
+    "@babel/node": "7.13.12",
+    "@babel/plugin-proposal-decorators": "7.13.5",
+    "@babel/preset-env": "7.13.12",
+    "@babel/preset-typescript": "7.13.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.0"
   }
 }
