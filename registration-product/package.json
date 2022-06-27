@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "testdb:up": "docker-compose -f .docker/docker-compose.test.yml up -d",
+    "test:migrate": "dotenv -e ./.env.test -- npx prisma migrate dev",
     "test": "npm run testdb:up && dotenv -e ./.env.test -- npx prisma migrate deploy && dotenv -e ./.env.test -- jest --watchAll --collectCoverage",
     "dev": "dotenv -e ./.env.development -- tsnd -r tsconfig-paths/register --respawn --respawn --transpile-only ./src/shared/infra/server.ts",
-    "build": "tsc --build",
-    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/shared/infra/server.js"
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "start": "node ./dist/shared/infra/server.js"
   },
   "keywords": [],
   "author": "",
