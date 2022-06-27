@@ -5,10 +5,10 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 describe("Ordered Create", () => {
   it("Should be create a new ordered", async () => {
     const data = {
-      products: [1, 5, 6],
+      products: [1, 2, 3],
     };
 
-    mockedAxios.post.mockResolvedValueOnce({ valid: true });
+    mockedAxios.get.mockResolvedValueOnce({ data: { products: [1, 2, 3] } });
     const response = await request.post("/ordered").send(data);
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("ordered");
