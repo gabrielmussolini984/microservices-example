@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db-mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: example1
+      MYSQL_PASSWORD: example2022
+      MYSQL_ROOT_PASSWORD: example2022
+      MYSQL_DATABASE: dev-microservice-products
+    ports:
+      - '3306:3306'
+
+  db-postgres:
+    image: postgres
+    hostname: db
+    environment:
+      POSTGRES_USER: example
+      POSTGRES_PASSWORD: example2022
+      POSTGRES_DB: dev-microservice-ordered
+      PGDATA: /data/postgres
+    # volumes:
+    #    - postgres-ordered:/data/postgres
+    ports:
+      - '5432:5432'
+
+  app-ordered:
+    build: ./ordered
+    ports:
+      - '8080:8080'
+    entrypoint: .docker/entrypoint.sh
+    depends_on:
+      - db-postgres
+
+  app-products:
+    build: ./registration-product
+    ports:
+      - '8081:8081'
+    entrypoint: .docker/entrypoint.sh
+    depends_on:
+      - db-mysql
