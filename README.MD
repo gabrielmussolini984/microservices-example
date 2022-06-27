@@ -40,7 +40,7 @@ sudo chmod +x registration-product/.docker/entrypoint.sh
 sudo chmod +x registration-product/.docker/wait-for-it.sh
 ```
 ```shell
-docker-compose up
+docker-compose up --build
 ```
 
 The command initialize all services and database necessary for use.
