@@ -6,9 +6,7 @@ services:
     environment:
       POSTGRES_USER: example
       POSTGRES_PASSWORD: example2022
-      POSTGRES_DB: microserviceone
+      POSTGRES_DB: test-microservice-ordered
       PGDATA: /data/postgres
     ports:
-      - '5432:5432'
-    volumes: 
-      - ./db:/data/postgres
+      - '5434:5432'
